@@ -1,6 +1,6 @@
 //https://practice.geeksforgeeks.org/problems/ugly-numbers2254/1/#
 //time : O(N * logn) where n is the number
-//Time linit exceed!
+//Time linit exceed! and also giving wrong ans in some TCs!
 
 package com.example.test;
 
@@ -32,6 +32,34 @@ public class UglyNumbers {
         System.out.println(pq.toString());
    return res;
     }
+}
+
+// Time : O(N)
+// Space : O(N)
+class Solution {
+    public int nthUglyNumber(int n) {
+        
+    int factor2 = 2, factor3 = 3, factor5 = 5;
+    int index2 = 0, index3 = 0, index5 = 0;
+        
+    int[] ugly = new int[n];
+    ugly[0] = 1;
+        
+    for(int i = 1; i < n; i++){
+        int min = Math.min(factor2, Math.min(factor3, factor5));
+        ugly[i] = min;
+        if(factor2 == min){
+            factor2 = 2 * ugly[++index2];
+        }
+         if(factor3 == min){
+            factor3 = 3 * ugly[++index3];
+        }
+         if(factor5 == min){
+            factor5 = 5 * ugly[++index5];
+        }
+    } 
+        return ugly[n - 1];
+}
 }
 
 
